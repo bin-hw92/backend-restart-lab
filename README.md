@@ -1,40 +1,25 @@
-# Backend Restart Lab
+# 백엔드 다시 공부하기
 
-Java·Spring 백엔드 감각을 다시 익히기 위한 개인 학습 저장소입니다. 기존 Java/JSP와 SQL 경험을 출발점으로 삼고, 현재 익숙한 React와 연결할 수 있는 API까지 단계적으로 만듭니다.
+예전에 Java/JSP와 SQL로 교육 서비스를 개발했는데, 최근에는 React 쪽 일을 주로 했습니다. 풀스택으로 다시 취업을 준비하면서 백엔드에서 잊어버린 부분을 하나씩 다시 공부하려고 만든 저장소입니다.
 
-## 왜 Java → Spring → Node 순서인가
+우선 Java를 복습하고 Spring Boot로 작은 API를 만들어 보려고 합니다. Node.js도 관심이 있지만, 당장은 여러 가지를 한꺼번에 하기보다 Java와 Spring에 집중할 생각입니다.
 
-- **Java:** 문법보다 컬렉션, 예외, 객체 설계, 날짜/시간, Stream, SQL 연동의 감각을 되찾습니다.
-- **Spring Boot:** HTTP API, 계층 분리, 입력 검증, DB 트랜잭션, 인증, 배포를 하나의 작은 서비스에서 연습합니다.
-- **Node.js:** Java API를 직접 설명하고 수정할 수 있게 된 뒤 같은 기능을 TypeScript/Node로 비교 구현합니다. 처음부터 두 서버 스택을 동시에 공부하지 않습니다.
+## 지금 들어 있는 것
 
-현재 예제는 **메모리에 저장하는 학습 항목 API**입니다. 서버를 다시 시작하면 데이터가 사라집니다. DB, 인증, 배포를 이미 구현했다고 보이지 않도록 단계별로 확장합니다.
-
-## 준비
-
-- JDK 21
-- Maven 3.6.3 이상
-- 편집기 또는 IDE
-
-이 저장소는 Spring Boot 4.1.1과 Java 21을 기준으로 작성했습니다. [Spring Boot 시스템 요구 사항](https://docs.spring.io/spring-boot/system-requirements.html)에서 현재 지원 범위를 확인할 수 있습니다.
-
-```powershell
-java -version
-mvn -version
-```
-
-## 폴더
-
-| 경로 | 내용 |
+| 폴더 | 내용 |
 | --- | --- |
-| `java-basics/` | Java 문법과 컬렉션·Stream 복습용 단독 예제 |
-| `study-api/` | Spring Boot REST API 첫 단계 |
-| `docs/ROADMAP.md` | 6주 학습 순서와 완료 기준 |
-| `docs/LEARNING_LOG.md` | 공부한 내용과 막힌 부분을 기록하는 양식 |
+| [`java-basics`](java-basics) | Java 문법을 다시 보려고 만든 지출 합계 예제 |
+| [`study-api`](study-api) | 학습할 일을 등록하고 완료 처리하는 Spring Boot API |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | 앞으로 공부할 순서 |
+| [`docs/LEARNING_LOG.md`](docs/LEARNING_LOG.md) | 공부하면서 알게 된 점을 적어둘 곳 |
 
-## 시작하기
+`study-api`는 아직 메모리에만 저장합니다. 서버를 다시 켜면 등록한 내용이 사라집니다. DB 연결과 인증은 다음 단계에서 붙여 볼 예정입니다.
 
-### 1. Java 복습
+## 실행해 보기
+
+JDK 21과 Maven 3.6.3 이상이 필요합니다. Spring Boot는 4.1.1을 사용했습니다. 버전별 지원 범위는 [Spring Boot 문서](https://docs.spring.io/spring-boot/system-requirements.html)를 참고했습니다.
+
+먼저 Java 예제부터 실행합니다.
 
 ```powershell
 cd java-basics
@@ -42,35 +27,26 @@ javac ExpenseSummary.java
 java ExpenseSummary
 ```
 
-코드를 읽은 뒤 `java-basics/README.md`의 과제를 본인이 직접 수정합니다.
-
-### 2. Spring API 실행
+Spring API는 이렇게 실행합니다.
 
 ```powershell
 cd study-api
 mvn spring-boot:run
 ```
 
-다른 PowerShell 창에서:
+서버가 켜지면 다른 PowerShell 창에서 목록 조회와 등록을 해볼 수 있습니다.
 
 ```powershell
 Invoke-RestMethod http://localhost:8080/api/study-tasks
-Invoke-RestMethod -Method Post -Uri http://localhost:8080/api/study-tasks -ContentType 'application/json' -Body '{"title":"Java collection 복습"}'
+Invoke-RestMethod -Method Post -Uri http://localhost:8080/api/study-tasks -ContentType 'application/json' -Body '{"title":"Java 컬렉션 복습"}'
 Invoke-RestMethod http://localhost:8080/api/study-tasks
 ```
 
-API 계약과 다음 구현 과제는 [`study-api/README.md`](study-api/README.md)에 있습니다.
+API 경로와 다음에 만들어 볼 기능은 [`study-api/README.md`](study-api/README.md)에 적었습니다.
 
-## 학습 원칙
+## 어떻게 공부할지
 
-1. 기능을 만들기 전에 입력·출력·오류를 짧게 적습니다.
-2. AI가 제안한 코드는 각 계층의 역할과 변경 이유를 본인 말로 설명한 뒤 반영합니다.
-3. 완료한 기능은 요청 예시와 화면 또는 응답 결과를 README에 남깁니다.
-4. 미완료 기능을 이력서의 구현 경험으로 적지 않습니다.
+예제를 그대로 따라 치고 끝내지 않고, 작은 기능을 직접 바꿔 보면서 왜 그렇게 동작하는지 기록하려고 합니다. AI의 도움을 받더라도 이해하지 못한 코드는 그냥 넘기지 않고, 실행 결과와 수정한 이유를 같이 남겨 보겠습니다.
 
-## 현재 상태
-
-- Java 단독 복습 예제 1개와 메모리 기반 Spring CRUD API의 시작 코드가 들어 있습니다.
-- DB, JPA, 인증, Docker 배포, Node 비교 구현은 학습 과제로 남겨 두었습니다.
-- 이 환경에 JDK·Maven이 설치되지 않아 실행 결과는 아직 확인하지 않았습니다.
+아직 이 PC에 JDK와 Maven을 설치하지 않아 위 코드를 직접 실행해 보지는 못했습니다. 설치 후 실행하면서 발견한 문제도 이 저장소에 기록하겠습니다.
 
