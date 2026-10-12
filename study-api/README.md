@@ -1,35 +1,35 @@
-# Study API — 1단계
+# 공부할 일 기록 API
 
-메모리에 학습 항목을 저장하는 Spring Boot REST API입니다. 서비스가 재시작되면 데이터가 사라집니다.
-
-## 실행
+Spring Boot를 다시 익히려고 만든 작은 API입니다. 공부할 일을 등록하고, 목록을 보거나 완료 처리할 수 있습니다. 지금은 메모리에 저장하기 때문에 서버를 끄면 데이터가 사라집니다.
 
 ```powershell
 mvn spring-boot:run
 ```
 
-## API
+## 현재 API
 
-| 메서드 | 경로 | 결과 |
+| 메서드 | 주소 | 동작 |
 | --- | --- | --- |
-| GET | `/api/study-tasks` | 전체 목록, 200 |
-| GET | `/api/study-tasks/{id}` | 한 항목, 200 / 없으면 404 |
-| POST | `/api/study-tasks` | 생성, 201 / 제목이 비면 400 |
-| PATCH | `/api/study-tasks/{id}/complete` | 완료, 200 / 없으면 404 |
-| DELETE | `/api/study-tasks/{id}` | 삭제, 204 / 없으면 404 |
+| GET | `/api/study-tasks` | 전체 목록 보기 |
+| GET | `/api/study-tasks/{id}` | 한 건 보기 |
+| POST | `/api/study-tasks` | 새 항목 등록 |
+| PATCH | `/api/study-tasks/{id}/complete` | 완료 처리 |
+| DELETE | `/api/study-tasks/{id}` | 삭제 |
 
-POST 요청 본문:
+등록할 때 보내는 JSON은 아래와 같습니다.
 
 ```json
-{"title":"Java collection 복습"}
+{"title":"Java 컬렉션 복습"}
 ```
 
-## 다음에 직접 구현할 기능
+없는 ID는 404, 빈 제목은 400으로 응답하도록 해두었습니다. 등록하면 201, 삭제하면 204를 반환합니다.
 
-1. 제목 길이 제한과 오류 응답 형식을 정합니다.
-2. 완료 항목만 필터링하는 조회를 만듭니다.
-3. DB 테이블을 설계하고 메모리 저장을 교체합니다.
-4. React 화면에서 목록·생성·완료 흐름을 연결합니다.
+## 다음에 해볼 것
 
-각 기능을 추가할 때 `Controller → Service → 저장소`의 책임을 왜 나누는지 설명할 수 있어야 합니다.
+1. 제목 길이 제한과 오류 응답 형식 정하기
+2. 완료한 항목만 조회하기
+3. DB 테이블을 만들고 메모리 저장 교체하기
+4. React 화면에서 목록·등록·완료 처리 연결하기
+
+기능을 추가하면서 Controller와 Service를 왜 나눴는지도 같이 정리해 보려고 합니다.
 
