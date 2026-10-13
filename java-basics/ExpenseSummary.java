@@ -26,6 +26,9 @@ public class ExpenseSummary {
 
         System.out.println("전체 지출: " + total);
         System.out.println("카테고리별 지출: " + byCategory);
+
+        
+        System.out.println("FOOD 지출: " + byCategory.get("FOOD"));
     }
 }
 
