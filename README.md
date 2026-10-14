@@ -8,7 +8,7 @@
 
 | 폴더 | 내용 |
 | --- | --- |
-| [`java-basics`](java-basics) | Java 문법을 다시 보려고 만든 지출 합계 예제 |
+| [`java-basics`](java-basics) | 같은 성적/지출 기능의 Java 8·Java 21 비교 예제와 실행 스크립트 |
 | [`study-api`](study-api) | 학습할 일을 등록하고 완료 처리하는 Spring Boot API |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | 앞으로 공부할 순서 |
 | [`docs/LEARNING_LOG.md`](docs/LEARNING_LOG.md) | 공부하면서 알게 된 점을 적어둘 곳 |
@@ -48,5 +48,5 @@ API 경로와 다음에 만들어 볼 기능은 [`study-api/README.md`](study-ap
 
 예제를 그대로 따라 치고 끝내지 않고, 작은 기능을 직접 바꿔 보면서 왜 그렇게 동작하는지 기록하려고 합니다. AI의 도움을 받더라도 이해하지 못한 코드는 그냥 넘기지 않고, 실행 결과와 수정한 이유를 같이 남겨 보겠습니다.
 
-아직 이 PC에 JDK와 Maven을 설치하지 않아 위 코드를 직접 실행해 보지는 못했습니다. 설치 후 실행하면서 발견한 문제도 이 저장소에 기록하겠습니다.
+2026-10-14 맥에서 JDK 21과 Maven 3.10.0으로 Java 예제 실행과 Spring API 빌드를 확인했습니다. API는 임시 항목 등록·완료·삭제까지 검증한 후 종료했습니다. Java 8 방식의 비교 예제와 실행 방법은 [`java-basics/README.md`](java-basics/README.md)에 있고, 직접 수정한 내용과 실행 결과는 [`docs/LEARNING_LOG.md`](docs/LEARNING_LOG.md)에 기록했습니다.
 
