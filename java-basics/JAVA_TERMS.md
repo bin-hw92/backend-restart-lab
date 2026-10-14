@@ -1,5 +1,31 @@
 # 현재 예제의 Java 용어
 
+Map 순서 비교는 [지출 연습문제의 TreeMap/LinkedHashMap 설명](지출_연습문제.md#treemap과-linkedhashmap-차이)에 있습니다. 카테고리는 입력 순서를 유지하고 날짜는 오름차순으로 정렬하는 이유를 같은 날짜 입력 예제로 비교합니다.
+
+## 지출 집계에서 추가로 만난 함수
+
+| 표현 | 의미 | 반복문에서 대응되는 부분 |
+| --- | --- | --- |
+| `amount.compareTo(기준금액)` | 작은 값은 음수, 같으면 0, 큰 값은 양수 | 금액 조건 비교. 이상은 >= 0, 이하는 <= 0 |
+| `total.add(amount)` | 두 금액을 더한 새 BigDecimal 반환 | 결과를 total에 다시 대입해 누적 |
+| `map(Expense::amount)` | Expense마다 금액을 꺼냄 | getAmount() |
+| `reduce(BigDecimal.ZERO, BigDecimal::add)` | 0부터 금액을 차례로 더해 숫자 하나 반환 | 합계 변수와 add 반복 |
+| `groupingBy(기준, Map생성방법, 그룹계산)` | 기준별로 나누고 각 그룹 결과를 Map에 저장 | Map 키별로 이전 금액을 가져와 누적 |
+| `reducing(0, 금액꺼내기, 더하기)` | 그룹 안에서 어떻게 합칠지 정하는 Collector 생성 | 카테고리/날짜 하나 안의 합계 계산 |
+| `TreeMap::new` | 정렬된 Map을 만드는 생성자 참조 | 날짜 키를 오름차순으로 보관 |
+
+`reduce`는 Stream을 마무리해 합계 결과를 직접 구하는 함수이고, `Collectors.reducing`은 collect/groupingBy에 넘기는 계산 방법을 만듭니다. 그래서 숫자 하나의 전체/조건 합계는 reduce, 카테고리별·날짜별 Map은 groupingBy 안의 reducing으로 작성할 수 있습니다. 이 함수들도 Java 8에서 제공됩니다.
+
+`intValue()`는 비교 함수가 아닙니다. 소수 부분을 버리고 int 범위로 변환하므로 0.50은 0이 됩니다. 값 자체를 비교하려면 compareTo를 사용하세요.
+
+`System.out.println("IllegalArgumentException")`은 이름을 출력할 뿐입니다. `throw new IllegalArgumentException("설명")`은 실제 예외를 발생시켜, 처리하는 catch가 없다면 실행을 중단시킵니다.
+
+record에서는 `Expense { 검증 코드 }` 형태의 compact constructor를 사용할 수 있습니다. date/category/amount 인자가 이미 선언되어 있고, 검증 블록을 정상 종료하면 필드에 값이 자동 대입됩니다. 일반 클래스 생성자처럼 this.amount에 직접 대입하지 않습니다.
+
+공식 참고: [BigDecimal 비교와 intValue](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/math/BigDecimal.html), [Collectors](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html), [Record 생성자](https://docs.oracle.com/en/java/javase/21/language/records.html).
+
+---
+
 현재 GradeSummary의 함수와 문법을 기준으로 정리합니다. 기존 반복문 방식도 Java 21에서 계속 사용할 수 있습니다.
 
 ## 도입 버전
