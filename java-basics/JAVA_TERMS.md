@@ -1,5 +1,22 @@
 # 현재 예제의 Java 용어
 
+현재 공부는 [문자열 금액 입력](lessons/02-amount-input/README.md)입니다. 숫자 변환·예외 종류·catch 범위 설명은 이 문서 마지막 절에 있습니다.
+
+## 등록 결과 복습: void / boolean / return / 매개변수
+
+[등록결과 연습문제](lessons/01-registration/README.md)와 해당 폴더의 ExpenseRegistrationJava8/21 파일 주석을 함께 봅니다.
+
+| 표현 | 의미와 이번 예제 |
+| --- | --- |
+| 반환형 void | 호출한 쪽에 결과값을 돌려주지 않는 메서드 |
+| 반환형 boolean | 호출한 쪽에 true/false를 돌려주는 메서드. 이번 registerExpense는 성공 여부를 알림 |
+| return | 현재 메서드 호출을 끝냄. 반환값이 있으면 그 값도 돌려줌. 호출한 main의 반복문까지 끝내는 것은 아님 |
+| 매개변수 | 메서드 선언의 전달받을 값 이름과 타입. 예: BigDecimal amount |
+| 인자 | 호출할 때 전달하는 실제 값. 예: new BigDecimal("12000") |
+| if (registered) | boolean 변수 registered가 true일 때 실행. if (registered == true)와 같은 조건 |
+
+`static`은 반환형이 아닙니다. 지금 예제에서는 static main이 같은 클래스의 메서드를 인스턴스 생성 없이 호출하는 구조로 사용합니다. try-catch의 사용 가능 여부는 static/void 여부로 결정되지 않습니다.
+
 Map 순서 비교는 [지출 연습문제의 TreeMap/LinkedHashMap 설명](지출_연습문제.md#treemap과-linkedhashmap-차이)에 있습니다. 카테고리는 입력 순서를 유지하고 날짜는 오름차순으로 정렬하는 이유를 같은 날짜 입력 예제로 비교합니다.
 
 ## 키 조회와 순회 순서, 성능
@@ -165,3 +182,14 @@ new Grade로 생성하고 studentName()/score()로 값을 읽습니다. get 접�
 - `try`: 예외가 생길 수 있는 등록 코드를 실행합니다.
 - `catch (IllegalArgumentException e)`: 해당 종류의 예외가 발생했을 때 처리합니다.
 - `e.getMessage()`: 담겨 있는 설명을 문자열로 읽습니다. 인자는 넣지 않으며 출력은 println이 합니다.
+
+## 문자열 숫자 변환과 catch 범위 — 다음 실습
+
+[02. 문자열 금액 입력](lessons/02-amount-input/README.md)에서 직접 적용합니다.
+
+- 변환(파싱): `new BigDecimal("12000")`처럼 문자열을 계산할 수 있는 금액 객체로 바꾸는 일입니다. `"abc"`나 `""`는 NumberFormatException이 발생합니다.
+- 호출 전 인자 계산: `registerExpense(..., new BigDecimal(amountText))`에서는 숫자 변환이 메서드 진입 전에 실행됩니다. 그 예외는 등록 메서드 내부 catch가 잡지 못합니다. 이번에는 문자열을 그대로 전달한 뒤 메서드의 try 안에서 변환합니다.
+- NumberFormatException: 문자열의 숫자 형식이 잘못된 경우입니다. IllegalArgumentException의 하위 예외라 상위 타입 catch에서도 처리할 수 있습니다.
+- catch 순서: 종류를 나눠 처리하려면 NumberFormatException을 먼저, IllegalArgumentException을 나중에 둡니다. 해당하는 catch 하나가 선택되어 실행됩니다.
+
+공식 참고: [BigDecimal(String)](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/math/BigDecimal.html#%3Cinit%3E(java.lang.String)), [NumberFormatException](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NumberFormatException.html).

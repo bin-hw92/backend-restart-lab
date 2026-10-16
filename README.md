@@ -21,11 +21,13 @@ JDK 21과 Maven 3.6.3 이상이 필요합니다. Spring Boot는 4.1.1을 사용�
 
 먼저 Java 예제부터 실행합니다.
 
-```powershell
+```sh
 cd java-basics
-javac ExpenseSummary.java
-java ExpenseSummary
+bash run-sample.sh 8 amount-input
+bash run-sample.sh 21 amount-input
 ```
+
+현재 공부는 [문자열 금액 입력](java-basics/lessons/02-amount-input/README.md)입니다. 주제별 실습은 [lessons](java-basics/lessons/README.md)에 모으며, 스크립트는 임시 폴더에서 컴파일하므로 소스 옆에 class 파일이 생기지 않습니다.
 
 Spring API는 이렇게 실행합니다.
 
