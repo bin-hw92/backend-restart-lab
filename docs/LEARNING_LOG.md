@@ -1,5 +1,28 @@
 # 공부하면서 적어둘 것
 
+## 2026-10-16 — 예외처리 학습 내용 GitHub 정리
+
+- 사용자 요청: 현재 이해한 범위까지 GitHub에 반영하고, 이후 브랜치 정리가 끝나면 새로운 Java 파일과 공부할 내용 안내. 기존 방식대로 에이전트는 커밋·push·PR 생성까지, 머지는 사용자가 진행. 다음 문제는 머지·브랜치 정리 후 별도 작업으로 남김.
+- 포함 범위: 예외처리 문제, Java8/21 별도 답지·해설, 실행 선택지 exception-answer, Map 조회/순회 순서 설명, React 경험과 연결한 회고 초안·학습 기록.
+- 업로드 검증에서 원본8의 빈 try/getMessage 인자 오류 확인. 사용자 시도를 같은 위치의 주석에 보존하고 기존 생성자 throw 검증 복구. main에 정답 try-catch를 덮어쓰지 않았으며 완성 풀이와 메서드 분리 형태는 answers에 유지.
+- JDK21에서 grade·expense·exception-answer를 각각 --release8/21로 컴파일·실행해 여섯 실행 통과 및 버전별 출력 일치. 성적220, 지출54000, 답지 실패2회 후 정상집계. 원본8 생성자도 0/음수 거절·0.50 허용 확인. bash -n·diff --check 통과. 실제 Java8 런타임 검증은 아님.
+- 사용자는 현재 설명 범위까지 알겠다고 보고함. 새 문제 독립 풀이·전체 Java 학습 완료와는 구분. 관리자 회고는 이전 요청대로 입력·미리보기까지만 진행했으며 이번 GitHub 작업에서 저장/공개하지 않음.
+
+## 2026-10-16 — React 경험과 연결한 try-catch 회고 초안
+
+- 사용자 요청: React에서 초기에 비동기/콜백 오류 처리를 다룬 뒤 React Query·Axios 사용으로 직접 try-catch를 적을 일이 적었던 경험과 Java 예제를 쉽게 연결해 관리자에 작성. 저장하지 않고 미리보기까지만 확인.
+- Chrome의 기존 marry-mobile.site/admin 탭은 빈 새 글 화면이었음. 기존 공개 글 2개를 유지하고 제목 `React에서 익숙했던 오류 처리를 Java의 try-catch로 다시 이해하기`, slug `java-try-catch-from-react-experience`, 요약·본문6280자 입력. 공개하기 미선택, 저장하지 않은 변경 표시 확인. 저장/공개 버튼 미클릭.
+- React Query의 queryFn 오류 전달, Axios 실패 전달과 UI 처리 구분, JS await/try-catch와 나중에 실행되는 콜백의 범위, Java 생성자 throw/호출부 catch/getMessage, void·별도 클래스 오해, 메서드 분리, Java8/21 비교를 주석 코드·표로 정리. TanStack/Axios/MDN 공식 문서 확인·본문 링크 첨부. 코드 실행 결과는 10월15일 답지 검증 사실이며 이번 사용자 독립 풀이 완료를 뜻하지 않음.
+- 미리보기에서 본문·코드8개·표2개 렌더링 및 비교 표 화면 확인. 원문은 `docs/engineering-drafts/2026-10-16-try-catch-from-react.md`, 화면은 `/private/tmp/try-catch-admin-preview-2026-10-16.png`. 사용자 검토·저장 대기. 기존 Java 파일·기존 게시글·공개 상태는 변경하지 않음. 커밋/PR 없음.
+
+## 2026-10-15 — 예외처리 별도 답지와 해설
+
+- 사용자 요청: try-catch가 어려워 이번 문제의 별도 Java 답지와 작성 이유를 먼저 공부하고, 새 문제는 이후 요청하기로 함.
+- 에이전트가 `java-basics/answers/ExpenseExceptionAnswerJava8.java`·`ExpenseExceptionAnswerJava21.java` 작성. 생성자 검증 → 호출부 try-catch → 집계로 이어지는 흐름을 주석으로 설명. 기본 main은 1·2번 직접 풀이, 파일 하단 registerExpense는 3번 메서드 분리 풀이이며 기본 main에서는 호출하지 않음.
+- `answers/예외처리_답지_해설.md`에 역할·실행 순서·작성 위치의 이유·사용자 getMessage 인자 오류·메서드 분리 대체 호출·버전 비교 정리. JAVA_TERMS/README 연결, run-sample.sh에 exception-answer 선택 추가.
+- 검증: JDK21에서 --release8/21로 각각 컴파일·실행. 두 버전 모두 실패 메시지2회 후 전체54000/조건합계37000/날짜37000·17000 출력 일치. 메서드 분리 형태도 임시 복사본에서 동일 출력, 0/음수 제외 후 정상 등록 계속 확인. 실제 JDK8 런타임 실행은 아님.
+- 사용자 원본 ExpenseSummaryJava8/21 파일은 작업 전후 SHA-256 일치로 보존 확인. 현재 원본8의 빈 try/getMessage 인자 오류는 답지 해설에 설명하고 직접 수정하지 않음. 사용자 풀이 완료·이해 완료로 기록하지 않음. 새 문제·커밋·PR·사이트 편집은 이번 범위에 없음.
+
 ## 2026-10-14 — 지출 최종 구현·Map 비교와 회고 추가
 
 - 사용자 요청: 문제 작업 커밋·PR까지만 생성, TreeMap과 ‘listmap’ 차이를 문제 하단 설명, 오늘 marry-mobile 관리자 회고에 추가. listmap은 현재 코드의 LinkedHashMap으로 해석.

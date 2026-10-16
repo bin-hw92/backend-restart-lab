@@ -2,7 +2,9 @@
 
 ## Java 8 / Java 21 나란히 연습
 
-현재 다음 실습은 [지출 연습문제](지출_연습문제.md)의 1번입니다. 각 문제의 수정 위치·입력·기대 결과를 적었습니다.
+현재는 [예외처리 답지 해설](answers/예외처리_답지_해설.md)까지 공부한 내용을 GitHub에 정리하는 단계입니다. [Java 8 답지](answers/ExpenseExceptionAnswerJava8.java)의 [A]~[C]부터 읽고 [Java 21 답지](answers/ExpenseExceptionAnswerJava21.java)와 비교할 수 있습니다. 사용자가 PR을 머지하고 브랜치 정리를 마친 뒤, 새로운 Java 파일과 다음 학습 내용을 준비합니다. 이번 변경에는 새 문제를 추가하지 않았습니다.
+
+답지는 `bash run-sample.sh 8 exception-answer`, `bash run-sample.sh 21 exception-answer`로 실행합니다. 기존 [예외처리 연습문제](예외처리_연습문제.md)와 [지출 연습문제](지출_연습문제.md)는 복습 자료입니다.
 
 이제 [두 버전 학습 안내](두버전_학습안내.md)를 먼저 읽고 성적 집계부터 연습합니다. `java8/GradeSummary.java`와 `java21/GradeSummary.java`는 같은 입력과 출력을 가지며, 일반 클래스/반복문과 record/Stream을 비교할 수 있습니다.
 

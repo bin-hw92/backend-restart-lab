@@ -44,6 +44,9 @@ public class ExpenseSummaryJava21 {
             //new Expense(LocalDate.of(2026, 10, 2), "TRANSPORT", new BigDecimal("0")) //5번 추가 문제.
         ));
 
+        // [다음 실습] 예외처리_연습문제.md 1번: 이 위치에서 0원 지출을 add하려는 시도를 try-catch로 처리.
+        // List.of 안의 0원 주석은 유지합니다. 생성 중 오류가 나면 목록 전체가 완성되지 않습니다.
+
         // map: Expense를 금액 BigDecimal로 바꿉니다. reduce: 0에서 시작해 금액을 하나씩 더합니다.
         // Expense::amount는 expense -> expense.amount(), BigDecimal::add는 (a, b) -> a.add(b).
         BigDecimal total = expenses.stream()

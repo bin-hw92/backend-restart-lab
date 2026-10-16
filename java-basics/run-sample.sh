@@ -7,7 +7,7 @@ sample_root="$(cd "$(dirname "$0")" && pwd)"
 
 case "$sample_version" in
   8|21) ;;
-  *) echo '사용법: bash run-sample.sh <8|21> [grade|expense]' >&2; exit 2 ;;
+  *) echo '사용법: bash run-sample.sh <8|21> [grade|expense|exception-answer]' >&2; exit 2 ;;
 esac
 
 case "$sample_name" in
@@ -19,7 +19,11 @@ case "$sample_name" in
     sample_source="$sample_root/ExpenseSummaryJava$sample_version.java"
     sample_class="ExpenseSummaryJava$sample_version"
     ;;
-  *) echo '예제 이름은 grade 또는 expense입니다.' >&2; exit 2 ;;
+  exception-answer)
+    sample_source="$sample_root/answers/ExpenseExceptionAnswerJava$sample_version.java"
+    sample_class="ExpenseExceptionAnswerJava$sample_version"
+    ;;
+  *) echo '예제 이름은 grade, expense 또는 exception-answer입니다.' >&2; exit 2 ;;
 esac
 
 # 두 버전 모두 JDK 21에서 실행하되 컴파일 대상 문법/API를 구분합니다.
