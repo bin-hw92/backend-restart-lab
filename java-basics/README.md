@@ -1,12 +1,29 @@
-# Java 다시 보기: 지출 합계
+# Java 8·21 복습
 
-## Java 8 / Java 21 나란히 연습
+## 현재 공부할 곳
 
-현재는 [예외처리 답지 해설](answers/예외처리_답지_해설.md)까지 공부한 내용을 GitHub에 정리하는 단계입니다. [Java 8 답지](answers/ExpenseExceptionAnswerJava8.java)의 [A]~[C]부터 읽고 [Java 21 답지](answers/ExpenseExceptionAnswerJava21.java)와 비교할 수 있습니다. 사용자가 PR을 머지하고 브랜치 정리를 마친 뒤, 새로운 Java 파일과 다음 학습 내용을 준비합니다. 이번 변경에는 새 문제를 추가하지 않았습니다.
+새 실습은 [lessons](lessons/README.md) 아래에 주제별로 묶습니다.
+
+| 순서 | 내용 | 진행 상태 |
+| --- | --- | --- |
+| [01-registration](lessons/01-registration/README.md) | boolean 등록 결과와 성공·실패 건수 | 두 버전 TODO 1·2 작성·실행 확인 |
+| [02-amount-input](lessons/02-amount-input/README.md) | 문자열 금액 변환과 예외처리 범위 | **다음 공부: Java 8 TODO 1부터** |
+
+02 폴더의 ExpenseInputJava8.java와 ExpenseInputJava21.java를 수정합니다. 먼저 Java 8에서 변환·등록을 try 안에 넣어보고, 확인 후 21에 적용합니다. 기존 성적·지출·답지는 복습용으로 보존했습니다.
+
+```sh
+cd ~/Desktop/project/backend-restart-lab/java-basics
+bash run-sample.sh 8 amount-input
+bash run-sample.sh 21 amount-input
+```
+
+시작 코드는 TODO가 비어 있어 성공0/실패6/목록0/합계0입니다. 완성 목표는 성공2/실패4/목록2/합계17000입니다. 문제·입력별 기대 결과·설명은 02의 README에 있습니다.
+
+직전 등록 실습은 `bash run-sample.sh 8 registration`, `bash run-sample.sh 21 registration`으로 복습합니다. **실행 스크립트는 임시 폴더에서 컴파일하고 결과를 정리하므로 소스 옆에 .class가 쌓이지 않습니다.**
 
 답지는 `bash run-sample.sh 8 exception-answer`, `bash run-sample.sh 21 exception-answer`로 실행합니다. 기존 [예외처리 연습문제](예외처리_연습문제.md)와 [지출 연습문제](지출_연습문제.md)는 복습 자료입니다.
 
-이제 [두 버전 학습 안내](두버전_학습안내.md)를 먼저 읽고 성적 집계부터 연습합니다. `java8/GradeSummary.java`와 `java21/GradeSummary.java`는 같은 입력과 출력을 가지며, 일반 클래스/반복문과 record/Stream을 비교할 수 있습니다.
+처음 시작하는 경우 [두 버전 학습 안내](두버전_학습안내.md)를 읽고 성적 집계부터 비교할 수 있습니다. `java8/GradeSummary.java`와 `java21/GradeSummary.java`는 같은 입력과 출력을 가지며, 일반 클래스/반복문과 record/Stream을 비교할 수 있습니다.
 
 ```sh
 cd ~/Desktop/project/backend-restart-lab/java-basics
@@ -23,9 +40,8 @@ Java 8 방식부터 복습하려면 새로 추가한 `ExpenseSummaryJava8.java`�
 JDK 21이 준비되면 맥 터미널에서 아래 명령으로 Java 8 API·문법 범위에 맞춰 컴파일합니다.
 
 ```sh
-cd java-basics
-javac -encoding UTF-8 --release 8 ExpenseSummaryJava8.java
-java ExpenseSummaryJava8
+cd ~/Desktop/project/backend-restart-lab/java-basics
+bash run-sample.sh 8 expense
 ```
 
 2026-10-14 맥에서 JDK 21로 컴파일·실행해 아래 출력과 일치하는 것을 확인했습니다. `--release 8`의 오래된 대상 옵션 경고는 있었지만 컴파일은 성공했습니다.
@@ -51,9 +67,8 @@ FOOD 지출: 21000
 
 `ExpenseSummary.java`는 지출 목록의 전체 금액과 카테고리별 금액을 계산하는 작은 예제입니다. Java를 다시 보려고 `record`, `List`, `Stream`, `BigDecimal`을 사용했습니다.
 
-```powershell
-javac ExpenseSummary.java
-java ExpenseSummary
+```sh
+bash run-sample.sh 21 expense
 ```
 
 실행한 다음에는 아래 내용을 직접 바꿔 보려고 합니다.
