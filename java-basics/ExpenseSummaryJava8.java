@@ -22,6 +22,16 @@ public class ExpenseSummaryJava8 {
             if (amount.compareTo(BigDecimal.ZERO) <= 0) {
                 // new: 예외 객체 생성. throw: 그 객체로 실제 오류 발생. catch가 없으면 종료됩니다.
                 // println은 반환값이 없는 void 함수라 throw 뒤에 사용할 수 없습니다.
+                // [2026-10-16 업로드 정리] 작성했던 시도는 아래에 보존합니다.
+                // 빈 try는 금액 오류를 발생시키지 않고, getMessage()에는 인자를 넣지 않습니다.
+                // 생성자는 throw로 거절하고 등록하는 쪽에서 catch합니다. 별도 answers 답지 참고.
+                /*
+                try {
+
+                }catch (IllegalArgumentException e){
+                    e.getMessage("금액은 0보다 커야 합니다.");
+                }
+                */
                 throw new IllegalArgumentException("금액은 0보다 커야 합니다.");
             }
             this.date = date;
@@ -54,6 +64,7 @@ public class ExpenseSummaryJava8 {
         expenses.add(new Expense(LocalDate.of(2026, 10, 2), "TRANSPORT", new BigDecimal("3000"))); //2번 카테고리 추가.
         // [5번 테스트] 생성자 검증을 넣으면 이 줄에서 예외로 종료되는 것이 정상입니다.
         // 1~4번 합계를 확인할 때는 0원 테스트 줄을 잠시 주석 처리하고 실행하세요.
+        // [다음 실습] 예외처리_연습문제.md 1번: 이 등록 시도를 try-catch로 처리하고 합계는 계속 출력.
         //expenses.add(new Expense(LocalDate.of(2026, 10, 2), "TRANSPORT", new BigDecimal("0"))); //추가 문제 관련.
 
         BigDecimal total = BigDecimal.ZERO;

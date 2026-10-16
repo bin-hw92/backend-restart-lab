@@ -2,6 +2,32 @@
 
 Map 순서 비교는 [지출 연습문제의 TreeMap/LinkedHashMap 설명](지출_연습문제.md#treemap과-linkedhashmap-차이)에 있습니다. 카테고리는 입력 순서를 유지하고 날짜는 오름차순으로 정렬하는 이유를 같은 날짜 입력 예제로 비교합니다.
 
+## 키 조회와 순회 순서, 성능
+
+키에 맞는 값을 넣고 그 키로 조회하는 기능은 둘 다 제공합니다. 같은 날짜와 금액을 넣었다면 `get(날짜)`의 결과도 같습니다. 이번 예제에서 TreeMap을 선택한 이유는 **전체 날짜별 결과를 언제나 날짜순으로 보여주기 위해서**입니다.
+
+```java
+// 동일한 코드를 각각 LinkedHashMap과 TreeMap에서 실행한다고 가정
+map.put(2, 17000);
+map.put(1, 37000);
+System.out.println(map.get(1)); // 두 Map 모두 37000
+System.out.println(map);
+// LinkedHashMap: {2=17000, 1=37000} — 처음 입력한 키 순서
+// TreeMap:       {1=37000, 2=17000} — 키 정렬 순서
+```
+
+먼저 데이터를 정렬해 1→2 순서로 put하면 LinkedHashMap도 1→2 순서로 나옵니다. 다만 나중에 더 이른 날짜가 추가되면 입력 순서를 다시 정리해야 날짜순이 유지됩니다. TreeMap은 데이터가 어떤 순서로 들어와도 정렬을 관리합니다.
+
+| 작업 | LinkedHashMap | TreeMap |
+| --- | --- | --- |
+| 기본 순회 순서 | 처음 입력한 키 순서 | 키 정렬 순서 |
+| 키 조회·추가 비용 | 해시가 잘 분산되는 경우 평균 O(1) | O(log n) |
+| 이번 목적 | 카테고리 등장 순서 유지 | 날짜순 집계 결과 보장 |
+
+속도만으로 TreeMap을 고른 것은 아닙니다. 정렬된 키 순서가 필요한 경우 그 비용을 들여 유지하는 선택입니다. 키 조회만 필요하면 해시 기반 Map을 사용할 수 있고, 마지막 출력에서만 정렬하는 방법도 있습니다. O 표기는 데이터가 늘 때의 처리 비용이며 실제 실행 시간 벤치마크는 아닙니다.
+
+공식 근거: [LinkedHashMap의 입력 순서와 기본 연산](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html), [TreeMap의 정렬과 log(n) 연산](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html).
+
 ## 지출 집계에서 추가로 만난 함수
 
 | 표현 | 의미 | 반복문에서 대응되는 부분 |
@@ -130,3 +156,12 @@ new Grade로 생성하고 studentName()/score()로 값을 읽습니다. get 접�
 합계는 210→220으로 늘고 B도 60 이상이 되어 전원 통과합니다. 점수와 통과 문구가 붙는 것은 print의 줄바꿈 동작 때문이며 계산 오류가 아닙니다. 실습 코드는 보존하고 설명 주석만 추가했습니다.
 
 공식 참고: [Java 8 Stream](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html), [Java 8 Iterable.forEach](https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html#forEach-java.util.function.Consumer-), [Stream.toList의 도입 버전과 수정 불가 규칙](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html#toList()).
+
+## try / catch / throw / getMessage — 별도 답지로 보기
+
+2026-10-15. 예외를 발생시키는 생성자와 실패를 처리하는 호출부의 차이는 [예외처리 답지 해설](answers/예외처리_답지_해설.md)에 정리했습니다. [Java 8](answers/ExpenseExceptionAnswerJava8.java)·[Java 21](answers/ExpenseExceptionAnswerJava21.java) 답지에도 실행 순서와 이유를 주석으로 적었습니다.
+
+- `throw new IllegalArgumentException("설명")`: 설명을 담은 예외를 던집니다.
+- `try`: 예외가 생길 수 있는 등록 코드를 실행합니다.
+- `catch (IllegalArgumentException e)`: 해당 종류의 예외가 발생했을 때 처리합니다.
+- `e.getMessage()`: 담겨 있는 설명을 문자열로 읽습니다. 인자는 넣지 않으며 출력은 println이 합니다.
