@@ -1,0 +1,33 @@
+@base = http://127.0.0.1:3100/api/posts
+# 등록 응답의 id로 바꾸세요. 기존 다른 글을 실수로 수정하지 않게 먼저 확인합니다.
+@id = 1
+
+### 등록
+POST {{base}}
+Content-Type: application/json
+
+{"title":"첫 글","content":"NestJS 게시판 실습입니다.","author":"학습자"}
+
+### 목록
+GET {{base}}?page=1&limit=10
+
+### 검색
+GET {{base}}?q=NestJS
+
+### 상세
+GET {{base}}/{{id}}
+
+### 일부 수정
+PATCH {{base}}/{{id}}
+Content-Type: application/json
+
+{"title":"수정한 제목"}
+
+### 검증 실패 확인: null은 400
+PATCH {{base}}/{{id}}
+Content-Type: application/json
+
+{"title":null}
+
+### 삭제: 등록한 실습 글인지 id를 확인한 뒤 실행
+DELETE {{base}}/{{id}}

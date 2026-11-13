@@ -52,3 +52,8 @@ API 경로와 다음에 만들어 볼 기능은 [`study-api/README.md`](study-ap
 
 2026-10-14 맥에서 JDK 21과 Maven 3.10.0으로 Java 예제 실행과 Spring API 빌드를 확인했습니다. API는 임시 항목 등록·완료·삭제까지 검증한 후 종료했습니다. Java 8 방식의 비교 예제와 실행 방법은 [`java-basics/README.md`](java-basics/README.md)에 있고, 직접 수정한 내용과 실행 결과는 [`docs/LEARNING_LOG.md`](docs/LEARNING_LOG.md)에 기록했습니다.
 
+
+
+## 2026-11-13 NestJS 게시판 실습
+
+면접 준비용 [NestJS + Prisma + MySQL 게시판](nest-prisma-board/README.md)을 별도로 추가했습니다. 기존 Java·Spring 실습은 그대로 두고, 새 폴더에서 실행합니다.

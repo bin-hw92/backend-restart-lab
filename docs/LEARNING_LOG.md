@@ -131,3 +131,11 @@
 - 다음에 해볼 것:
 - 관련 커밋:
 
+
+
+## 2026-11-13 — NestJS + Prisma + MySQL 게시판 샘플
+
+- 사용자 요청으로 AI가 별도 feat/nest-prisma-board worktree의 nest-prisma-board에 완성 샘플을 작성. 기존 Java·Spring 학습 코드와 사용자가 푼 부분은 보존. 사용자 독립 구현·이해 완료를 의미하지 않음.
+- Controller → DTO/ValidationPipe → Service → Prisma → MySQL CRUD, 검색·페이지 나누기, 간단한 실습 HTML과 .http 예제 제공. Nest/Nuxt/Next 구분 및 PostgreSQL 어댑터·URL·자료형·검색·마이그레이션 차이는 README와 해당 코드 주석에 설명.
+- 기존 Docker MySQL을 시작하고 nest_board/nest_board_test와 전용 계정 생성. 기존 서비스 DB 초기화 없음. .env/의존성/빌드/생성 클라이언트는 Git 제외.
+- Node 24.21.0, NestJS 11.2.10, Prisma 7.10.1에서 build 및 실제 MySQL HTTP 통합 테스트10개 통과. CRUD·검증·서버 재시작 후 저장 유지·검색·페이지·404·HTML 제공 확인. start:dev의 HTTP 화면/API 200 확인 후 서버 종료. 브라우저 버튼 실제 클릭과 PostgreSQL 실행은 미검증. DB 전체 reset/drop/truncate 없음.
