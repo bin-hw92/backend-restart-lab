@@ -1,0 +1,25 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  // PostgreSQL로 옮길 때는 "postgresql". 어댑터·URL·타입·마이그레이션도 함께 변경합니다.
+  provider = "mysql"
+}
+
+model Post {
+  // MySQL은 AUTO_INCREMENT. PostgreSQL도 autoincrement()를 쓰지만 생성 SQL은 다릅니다.
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(100)
+  content   String   @db.Text
+  author    String   @db.VarChar(40)
+  // MySQL DATETIME에는 시간대 정보가 없습니다. 이 예제는 연결 세션과 저장값을 UTC로 맞춥니다.
+  // PostgreSQL에서 시점을 저장한다면 @db.Timestamptz(3)를 검토합니다.
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  updatedAt DateTime @updatedAt @db.DateTime(3)
+
+  @@index([createdAt, id])
+  @@map("posts")
+}

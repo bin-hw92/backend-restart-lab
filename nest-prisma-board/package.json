@@ -1,0 +1,37 @@
+{
+  "name": "nest-prisma-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NestJS + Prisma + MySQL 게시판 학습 예제",
+  "engines": { "node": "^22.12.0 || >=24.0.0" },
+  "scripts": {
+    "db:setup": "node scripts/setup-existing-mysql.mjs",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:status": "prisma migrate status",
+    "build": "npm run db:generate && tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "start:dev": "npm run db:generate && nest start --watch",
+    "test": "npm run build && node --env-file=.env scripts/run-tests.mjs"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "@prisma/adapter-mariadb": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "dotenv": "^17.0.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "prisma": "7.10.1",
+    "typescript": "5.9.3"
+  }
+}
